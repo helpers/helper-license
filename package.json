@@ -1,7 +1,7 @@
 {
   "name": "helper-license",
   "description": "Template helper for dynamically generating a basic, one-line license statement based on the given context, e.g. `Released under the MIT license`. Should work with any Handlebars, Lo-Dash, underscore, or any template engine that allows helper functions to be registered.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/jonschlinkert/helper-license",
   "author": {
     "name": "Jon Schlinkert",

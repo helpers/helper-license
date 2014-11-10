@@ -29,6 +29,26 @@ describe('license', function () {
     ]
   };
 
+  describe('when `license` is a string:', function () {
+    var locals = {license: "MIT"};
+
+    it('should return a formatted license statement:', function () {
+      licenseHelper(locals).should.eql('Released under the MIT license');
+    });
+
+    it('should linkify a formatted license statement:', function () {
+      licenseHelper(locals).should.eql('Released under the MIT license');
+    });
+
+    it('should work as a lodash helper:', function () {
+      _.template('<%= _license({license: license}) %>', locals, {imports: {_license: licenseHelper}}).should.eql('Released under the MIT license');
+    });
+
+    it('should work as a handlebars helper:', function () {
+      handlebars.registerHelper('license', licenseHelper);
+      handlebars.compile('{{license this}}')(locals).should.eql('Released under the MIT license');
+    });
+  });
   describe('when `licenses` is formatted as an array:', function () {
     it('should return a formatted license statement:', function () {
       licenseHelper(locals).should.eql('Released under the MIT license');

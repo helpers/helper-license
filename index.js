@@ -61,7 +61,7 @@ module.exports = function(locals) {
         license = o.license;
       }
 
-      res += license + ' license';
+      res += license + (o.suffix || ' license');
     }
 
   } catch (err) {

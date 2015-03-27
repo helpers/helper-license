@@ -1,13 +1,13 @@
 /*!
- * helper-license <https://github.com/jonschlinkert/helper-license>
+ * helper-license <https://github.com/helpers/helper-license>
  *
- * Copyright (c) 2014 Jon Schlinkert, contributors.
- * Licensed under the MIT License
+ * Copyright (c) 2014-2015, Jon Schlinkert.
+ * Licensed under the MIT License.
  */
 
 'use strict';
 
-var should = require('should');
+require('should');
 var handlebars = require('handlebars');
 var _ = require('lodash');
 var licenseHelper = require('./');

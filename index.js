@@ -1,31 +1,17 @@
 'use strict';
 
 var mdu = require('markdown-utils');
-var _ = require('lodash');
+var pluck = require('arr-pluck');
+var merge = require('mixin-deep');
 
-/**
- * Add a basic license statement
- *
- * ```js
- * {%= license() %}
- * //=> Released under the MIT license
- *
- * {%= license({linkify: true}) %}
- * //=> Released under the [MIT](https://github.com/jonschlinkert/helper-license/blob/master/LICENSE-MIT) license
- * ```
- *
- * @return {String} Complete license statement.
- */
-
-module.exports = function(locals) {
-  var context = {};
+module.exports = function license_(locals) {
+  var o = locals || {};
 
   // compatibility with template, verb and assemble.
   if (this && this.app && this.context) {
-    context = _.merge({}, this.options, this.app.cache.data, this.context);
+    o = merge({}, this.options, this.context, o);
   }
 
-  var o = _.merge({}, context, locals);
   var res = 'Released under the ';
   var urls = [];
 
@@ -43,7 +29,7 @@ module.exports = function(locals) {
       if (urls.length > 0) {
         res += urls.join(', ') + ' license' + (o.licenses.length <= 1 ? '' : 's');
       } else {
-        res += _.pluck(o.licenses, 'type').join(', ') + ' license' + (o.licenses.length <= 1 ? '' : 's');
+        res += pluck(o.licenses, 'type').join(', ') + ' license' + (o.licenses.length <= 1 ? '' : 's');
       }
 
     } else if (o.license) {
@@ -66,7 +52,7 @@ module.exports = function(locals) {
 
   } catch (err) {
     err.origin = __filename;
-    console.warn('No "license" or "licenses" properties found.', err);
+    throw new Error('helper-license can\'t find a "license" or "licenses" property: ', err);
   }
 
   return res;

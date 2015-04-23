@@ -10,7 +10,7 @@ module.exports = function license_(locals) {
   // support Template, verb and assemble.
   if (this && this.app && this.context) {
     this.app.union('reflinks', ['verb', 'template', 'assemble']);
-    o = merge({}, this.options, this.context, o);
+    o = merge({}, this.options, this.app.cache.data, this.context, o);
   }
 
   if (!o.license && !o.licenses) {

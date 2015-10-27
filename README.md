@@ -1,122 +1,91 @@
-# helper-license [![NPM version](https://badge.fury.io/js/helper-license.svg)](http://badge.fury.io/js/helper-license)  [![Build Status](https://travis-ci.org/helpers/helper-license.svg)](https://travis-ci.org/helpers/helper-license) 
+# helper-license [![NPM version](https://badge.fury.io/js/helper-license.svg)](http://badge.fury.io/js/helper-license)  [![Build Status](https://travis-ci.org/helpers/helper-license.svg)](https://travis-ci.org/helpers/helper-license)
 
-> Template helper for dynamically generating a basic, one-line license statement based on the given context, e.g. `Released under the MIT license`. Should work with any Handlebars, Lo-Dash, underscore, or any template engine that allows helper functions to be registered.
+> Template helper for adding a formatted license statement based on the license type in package.json.
 
+## Install
 
-## Install with [npm](npmjs.org)
+Install with [npm](https://www.npmjs.com/)
 
-```bash
-npm i helper-license --save
+```sh
+$ npm i helper-license --save
 ```
 
-## Usage example
-
-Add a basic license statement to a document with [verb]:
+## Usage
 
 ```js
-{%= license() %}
-//=> Released under the MIT license
-
-{%= license({linkify: true}) %}
-//=> Released under the [MIT](https://github.com/jonschlinkert/helper-license/blob/master/LICENSE-MIT) license
+var license = require('helper-license');
+var pkg = require('./package');
+license(pkg);
+//=> 'Released under the MIT License.'
 ```
 
-## Other engines/apps
-
-Add a basic license statement
+The following example shows how to register the helper with [verb](https://github.com/verbose/verb), but it should work similarly with handlebars, lodash or any other template engine.
 
 ```js
-var pkg = require('./package.json');
+var license = require('helper-license');
+var verb = require('verb');
+var app = verb();
 
-// handlebars
-Handlebars.compile('{{license this}}')(pkg);
-// lo-dash
-_.template('<%= license({licenses: licenses}) %>', )
-// verb
-verb.render('{%= license({licenses: licenses}) %}', pkg);
+app.helper('license', function(type) {
+  // handle these settings however you want...
+  return license({type: type}, {linkify: true});
+});
 
-// all result in:
-//=> Released under the MIT license
+// USAGE:
+//  <%= license("MIT") %>
 ```
 
-Linkify:
+## Options
+
+**options.linkify**
+
+Pass `linkify: true` to add a markdown link to the license file:
 
 ```js
-_.template('<%= license({licenses: licenses, linkify: true}) %>', pkg);
-//=> Released under the [MIT](https://github.com/jonschlinkert/helper-license/blob/master/LICENSE-MIT) license
+license(pkg, {linkify: true});
+//=> 'Released under the [MIT License](./LICENSE).'
 ```
 
-## Registering the helper
-
-> This should work with any engine, here are a few examples to get you started
-
-### [template]
+**options.filepath**
 
 ```js
-template.helper('license', require('helper-license'));
-```
-
-### [assemble]
-
-```js
-assemble.helper('license', require('helper-license'));
-```
-
-### [verb]
-
-```js
-verb.helper('license', require('helper-license'));
-```
-
-### [handlebars]
-
-```js
-var handlebars = require('handlebars');
-handlebars.registerHelper('license', require('helper-license'));
+license(pkg, {linkify: true, filepath: 'foo'});
+//=> 'Released under the [MIT License](foo).'
 ```
 
 ## Related projects
-* [helper-copyright](https://github.com/helpers/helper-copyright): Template helper for adding a basic, one-line copyright statement, with… [more](https://github.com/helpers/helper-copyright)
-* [helper-reflinks](https://github.com/helpers/helper-reflinks): Template helper for generating a list of markdown formatted reference… [more](https://github.com/helpers/helper-reflinks)
-* [helper-related](https://github.com/helpers/helper-related): Template helper for generating a list of links to the… [more](https://github.com/helpers/helper-related)
-* [template-helpers](https://github.com/jonschlinkert/template-helpers): Generic JavaScript helpers that can be used with any template… [more](https://github.com/jonschlinkert/template-helpers)
-* [verb](https://github.com/assemble/verb): Verb makes it dead simple to generate markdown documentation, using… [more](https://github.com/assemble/verb)
+
+* [handlebars-helpers](https://www.npmjs.com/package/handlebars-helpers): 120+ Handlebars helpers in ~20 categories, for Assemble, YUI, Ghost or any Handlebars project. Includes… [more](https://www.npmjs.com/package/handlebars-helpers) | [homepage](https://github.com/assemble/handlebars-helpers)
+* [helper-reflinks](https://www.npmjs.com/package/helper-reflinks): Template helper for generating a list of markdown formatted reference links to github repos for… [more](https://www.npmjs.com/package/helper-reflinks) | [homepage](https://github.com/helpers/helper-reflinks)
+* [helper-related](https://www.npmjs.com/package/helper-related): Template helper for generating a list of links to the homepages of related GitHub/npm projects. | [homepage](https://github.com/helpers/helper-related)
+* [template-helpers](https://www.npmjs.com/package/template-helpers): Generic JavaScript helpers that can be used with any template engine. Handlebars, Lo-Dash, Underscore, or… [more](https://www.npmjs.com/package/template-helpers) | [homepage](https://github.com/jonschlinkert/template-helpers)
 
 ## Running tests
+
 Install dev dependencies:
 
-```bash
-npm i -d && npm test
+```sh
+$ npm i -d && npm test
 ```
 
 ## Contributing
-Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/helpers/helper-license/issues)
+
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/helpers/helper-license/issues/new).
 
 ## Author
+
 **Jon Schlinkert**
 
-[github/jonschlinkert](https://github.com/jonschlinkert)
-[twitter/jonschlinkert](http://twitter.com/jonschlinkert)
++ [github/jonschlinkert](https://github.com/jonschlinkert)
++ [twitter/jonschlinkert](http://twitter.com/jonschlinkert)
 
 ## License
-Copyright (c) 2015 Jon Schlinkert
+
+Copyright © 2015 Jon Schlinkert
 Released under the MIT license.
 
 ***
 
-_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on April 23, 2015._
+_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on October 27, 2015._
 
 <!-- reflinks -->
-
-[template]: https://github.com/jonschlinkert/template
-[verb]: https://github.com/assemble/verb
-[assemble]: http://assemble.io
-[handlebars]: http://www.handlebarsjs.com/
-[lodash]: https://lodash.com/
-
-
-<!-- reflinks generated by verb-reflinks plugin -->
-
-[verb]: https://github.com/assemble/verb
-[template]: https://github.com/jonschlinkert/template
-[assemble]: http://assemble.io

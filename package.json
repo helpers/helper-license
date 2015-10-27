@@ -1,23 +1,14 @@
 {
   "name": "helper-license",
-  "description": "Template helper for dynamically generating a basic, one-line license statement based on the given context, e.g. `Released under the MIT license`. Should work with any Handlebars, Lo-Dash, underscore, or any template engine that allows helper functions to be registered.",
-  "version": "0.2.1",
+  "description": "Template helper for adding a formatted license statement based on the license type in package.json.",
+  "version": "0.3.0",
   "homepage": "https://github.com/helpers/helper-license",
-  "author": {
-    "name": "Jon Schlinkert",
-    "url": "https://github.com/jonschlinkert"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/helpers/helper-license.git"
-  },
+  "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "repository": "helpers/helper-license",
   "bugs": {
     "url": "https://github.com/helpers/helper-license/issues"
   },
-  "license": {
-    "type": "MIT",
-    "url": "https://github.com/helpers/helper-license/blob/master/LICENSE"
-  },
+  "license": "MIT",
   "files": [
     "index.js"
   ],
@@ -28,14 +19,22 @@
   "scripts": {
     "test": "mocha"
   },
-  "dependencies": {
-    "arr-pluck": "^0.1.0",
-    "markdown-utils": "^0.6.0",
-    "mixin-deep": "^1.0.1"
-  },
   "devDependencies": {
-    "handlebars": "^2.0.0",
-    "lodash": "^3.7.0",
-    "should": "^4.2.1"
+    "mocha": "^2.3.3"
+  },
+  "keywords": [
+    "helper",
+    "license"
+  ],
+  "verb": {
+    "related": {
+      "description": "",
+      "list": [
+        "helper-related",
+        "helper-reflinks",
+        "template-helpers",
+        "handlebars-helpers"
+      ]
+    }
   }
 }
